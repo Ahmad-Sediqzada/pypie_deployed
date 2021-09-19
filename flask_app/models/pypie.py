@@ -28,6 +28,15 @@ class PyPie:
         return results
 
     @classmethod
+    def get_all_user_voted_pies(cls, data):
+        pies_voted = []
+        query = "SELECT PyPie_id FROM votes JOIN users ON users.id = user_id WHERE user_id = %(id)s"
+        results = connectToMySQL('PyPie_Derby').query_db(query, data)
+        for result in results:
+            pies_voted.append(result['PyPie_id'])
+        return pies_voted
+
+    @classmethod
     def show_all_pypie(cls):
         query = "SELECT * FROM PyPies "\
         "LEFT JOIN users ON users.id = PyPies.user_id "\
@@ -51,7 +60,7 @@ class PyPie:
             }
             if len(all_pypies) > 0 and all_pypies[len(all_pypies) -1].id == result['id']:
                 all_pypies[len(all_pypies) -1].users_who_voted.append(user.User(vote_user_data))
-                new_post = False
+                new_pypie = False
 
             if new_pypie:
                 pypie = cls(result)

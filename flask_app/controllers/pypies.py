@@ -58,8 +58,12 @@ def display(id):
         return redirect('/')
     data = {
         "id": id
+
     }
-    return render_template('display.html', pypie = PyPie.get_one(data))
+    user_data = {
+        "id": session['user_id']
+    }
+    return render_template('display.html', pypie = PyPie.get_one(data), vote_pie = PyPie.get_all_user_voted_pies(user_data))
 
 
 @app.route('/vote/<int:id>')

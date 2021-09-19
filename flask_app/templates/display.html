@@ -17,8 +17,11 @@
             <p>{{pypie.filling}}</p>
             <p>{{pypie.crust}}</p>
             <p>Cast a vote:</p>
-
+            {% if pypie.id in vote_pie %}
+            <a href="/show/pypie">Already Voted!!!</a>
+            {%else%}
             <a href="/vote/{{pypie.id}}">DELICIOUS</a>
+            {% endif %}
         </form>
     </div>
 </body>

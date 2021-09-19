@@ -2,7 +2,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 
 class Vote:
-    db_name = 'PyPie_Derby'
+    db_name = 'pypie_derby'
     def __init__(self,db_data):
         self.id = db_data['id']
         self.created_at = db_data['created_at']
